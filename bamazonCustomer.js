@@ -47,7 +47,7 @@ function promptPurchase() {
                 if (currentQuantity < units) {
                     console.log("Insufficent amount. Please make a new selection");
                     promptPurchase();
-                } else (currentQuantity > units) 
+                } else if (currentQuantity > units) {
             console.log("There are " + newQuantity + " left");
                 
             var currentPrice = res[0].price;
@@ -63,7 +63,7 @@ function promptPurchase() {
             promptPurchase();
 
         });
-    
+                }
     
         })
 
