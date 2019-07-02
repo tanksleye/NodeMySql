@@ -52,6 +52,53 @@ function runSearch() {
     });
 }
 
+
+function forSale() {
+    inquirer
+      .prompt({
+          name: "sale",
+          type: "input",
+          message: "This is what you have for sale. Press Enter"
+      }).then(function(answer) {
+        var table = "SELECT * FROM products";
+        connection.query(table, function (err, res) {
+        console.log(res);
+    runSearch();
+        });
+      });
+    
+}
+
+function lowInventory() {
+    inquirer
+      .prompt({
+          name: "low",
+          type: "input",
+          message: "This is the list of inventory that have less than 5 units. Press Enter"
+      }).then(function(answer) {
+        var query = "SELECT * FROM products WHERE stock_quantity < 5";
+        connection.query(query, function (err, res) {
+            console.log(res);
+            runSearch();
+        })
+      })
+}
+
+function addInventory() {
+    inquirer
+      .prompt([
+          {
+          name: "productId",
+          message: "Which product would you like add inventory to?",
+          },{
+              name: "units",
+              message: "How many units would you like to add?"
+          }
+      ]).then(function(answer) {
+          var query = "UPDATE products set stock_quantity = 5 where item_id = 1; "
+      })
+}
+
 function newProduct() {
     inquirer
         .prompt([
@@ -97,36 +144,8 @@ function newProduct() {
     }
 
 
-function forSale() {
-    inquirer
-      .prompt({
-          name: "sale",
-          type: "input",
-          message: "This is what you have for sale. Press Enter"
-      }).then(function(answer) {
-        var table = "SELECT * FROM products";
-        connection.query(table, function (err, res) {
-        console.log(res);
-    runSearch();
-        });
-      });
-    
-}
 
-function lowInventory() {
-    inquirer
-      .prompt({
-          name: "low",
-          type: "input",
-          message: "This is the list of inventory that have less than 5 units. Press Enter"
-      }).then(function(answer) {
-        var query = "SELECT * FROM products WHERE stock_quantity < 5";
-        connection.query(query, function (err, res) {
-            console.log(res);
-            runSearch();
-        })
-      })
-}
+
 
 
 
