@@ -80,23 +80,31 @@ function lowInventory() {
         connection.query(query, function (err, res) {
             console.log(res);
             runSearch();
-        })
-      })
+        });
+      });
 }
 
 function addInventory() {
-    inquirer
-      .prompt([
+    inquirer.prompt([
           {
-          name: "productId",
+          name: "productID",
+          type: "input",
           message: "Which product would you like add inventory to?",
           },{
               name: "units",
+              type: "input",
               message: "How many units would you like to add?"
           }
       ]).then(function(answer) {
-          var query = "UPDATE products set stock_quantity = 5 where item_id = 1; "
-      })
+          var productID = answer.productID;
+          var units = answer.units;
+          var query = "UPDATE products set stock_quantity = ? where item_id = ?";
+
+          connection.query(query, [units, {item_id: productID}], function (err, res) {
+            console.log(res);
+            runSearch();
+          });
+      });
 }
 
 function newProduct() {

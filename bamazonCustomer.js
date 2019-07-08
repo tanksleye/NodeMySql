@@ -54,8 +54,6 @@ function promptPurchase() {
             var totalCost = (units * currentPrice);
                 connection.query(totalCost, function (err, res) {
                     console.log("your total cost is " + totalCost);
-                    
-                  
             });
         var updateQuery = "UPDATE products SET stock_quantity = ? WHERE item_id = ?";
         connection.query(updateQuery, [newQuantity, productID], function (err, res) {
